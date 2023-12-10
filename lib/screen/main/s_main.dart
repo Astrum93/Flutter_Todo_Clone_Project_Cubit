@@ -13,7 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen>
-    with SingleTickerProviderStateMixin, TodoDataProvider {
+    with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.todo;
   final tabs = [TabItem.todo, TabItem.search];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -52,7 +52,10 @@ class MainScreenState extends State<MainScreen>
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            todoData.addTodo();
+            /// read()는 Get의 find()와 같은 역할
+            // final todoData = context.read<TodoCubit>();
+            /// context.read<TodoCubit>() extention
+            context.readTodoCubit.addTodo();
           },
           child: const Icon(EvaIcons.plus),
         ),
